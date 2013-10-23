@@ -3,7 +3,7 @@
 SCRIPT=$(readlink -f "$0")
 SCRIPT_DIR=$(dirname "$SCRIPT")
 TPUT=$(which tput)
-FILES="Xmodmap ratpoisonrc screenrc"
+FILES="Xmodmap ratpoisonrc screenrc vim vimrc"
 
 if [[ $(pwd) != "${HOME}" ]]; then
     echo "WARNING: This script is meant to be run from your home directory, but you have run it from $(pwd)." | fmt
