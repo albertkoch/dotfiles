@@ -1,0 +1,25 @@
+exec exec xsetroot -solid black -cursor_name left_ptr
+exec exec xset -dpms
+exec exec xset s off
+exec exec wmname LG3D
+
+msgwait 3
+rudeness 12
+set border 0
+set bargravity c
+set bgcolor yellow
+startup_message off
+warp on
+
+exec exec xterm -e bash -l -c "screen -xRR"
+
+escape C-o
+
+bind c exec exec xterm -e bash -l -c "screen -xRR"
+bind C exec exec xterm -e bash -l
+bind j nextscreen
+bind v ratclick 2
+bind x exec exec xtrlock
+
+bind C-j nextscreen
+bind F20 ratclick 1
