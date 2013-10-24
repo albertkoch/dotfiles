@@ -4,6 +4,7 @@ SCRIPT=$(readlink -f "$0")
 SCRIPT_DIR=$(dirname "$SCRIPT")
 TPUT=$(which tput)
 FILES="Xmodmap ratpoisonrc screenrc vim vimrc"
+EXECUTABLES="ratpoison screen wmname xset xsetroot xterm xtrlock"
 
 if [[ $(pwd) != "${HOME}" ]]; then
     echo "WARNING: This script is meant to be run from your home directory, but you have run it from $(pwd)." | fmt
@@ -17,27 +18,23 @@ function colorize() {
     fi
 }
 
-function validate_executable() {
-    printf "Validating presence of %-40s" "$1 ..."
-    location=`which $1`
-    if [ 0 = $? ]; then
+function relpath() {
+    python -c "import os.path; print os.path.relpath('$1','$2')"
+}
+
+for exe in ${EXECUTABLES}; do
+    printf "Validating presence of %-40s" "${exe} ..."
+    location=`which ${exe}`
+    if [ 0 -eq $? ]; then
         printf "%s%s%s\n" "$(colorize setaf 2)" "$location" "$(colorize sgr0)"
     else
         echo -e "$(colorize setaf 1)not found$(colorize sgr0)"
     fi
-}
-
-validate_executable ratpoison
-validate_executable screen
-validate_executable wmname
-validate_executable xset
-validate_executable xsetroot
-validate_executable xterm
-validate_executable xtrlock
+done
 
 for file in ${FILES}; do
     link_name="$(pwd)/.$(basename $file)"
-    target=$(python -c "import os.path; print os.path.relpath('${SCRIPT_DIR}/${file}','$(pwd)')")
+    target=$(relpath "${SCRIPT_DIR}/${file}" "$(pwd)")
 
     if [ -e "${link_name}" -o -h "${link_name}" ]; then
         if [[ "$(readlink ${link_name})" != "$target" ]]; then
@@ -55,7 +52,7 @@ for file in ${FILES}; do
     fi
 done
 
-bashrc="$(python -c "import os.path; print os.path.relpath('${SCRIPT_DIR}/bashrc','$(pwd)')")"
+bashrc="$(relpath "${SCRIPT_DIR}/bashrc" "$(pwd)")"
 bashrc="source ${bashrc} ${bashrc}"
 if ! (grep "$bashrc" .bashrc 2>&1 >/dev/null); then
     printf "Adding configuration to .bashrc...                             "
