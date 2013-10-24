@@ -1,2 +1,3 @@
-vim/bundle/ledger
-vim/bundle/snipMate
+*.swp
+/vim/bundle/ledger
+/vim/bundle/snipMate
