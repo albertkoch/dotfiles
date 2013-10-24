@@ -55,7 +55,8 @@ for file in ${FILES}; do
     fi
 done
 
-bashrc="source $(python -c "import os.path; print os.path.relpath('${SCRIPT_DIR}/bashrc','$(pwd)')")"
+bashrc="$(python -c "import os.path; print os.path.relpath('${SCRIPT_DIR}/bashrc','$(pwd)')")"
+bashrc="source ${bashrc} ${bashrc}"
 if ! (grep "$bashrc" .bashrc 2>&1 >/dev/null); then
     printf "Adding configuration to .bashrc...                             "
     echo $bashrc >> .bashrc
