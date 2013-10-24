@@ -55,4 +55,11 @@ for file in ${FILES}; do
     fi
 done
 
+bashrc="source $(python -c "import os.path; print os.path.relpath('${SCRIPT_DIR}/bashrc','$(pwd)')")"
+if ! (grep "$bashrc" .bashrc 2>&1 >/dev/null); then
+    printf "Adding configuration to .bashrc...                             "
+    echo $bashrc >> .bashrc
+    echo "$(colorize setaf 2)done$(colorize sgr0)"
+fi
+
 # vim:tabstop=4:shiftwidth=4:expandtab
