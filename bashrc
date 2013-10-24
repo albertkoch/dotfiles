@@ -1,6 +1,7 @@
 set -o vi
 export EDITOR=`which vi`
 export LESSHISTFILE=-
+export LEDGER_FILE=ledger.ldg
 
 SCRIPT=$(readlink -f "$1")
 SCRIPT_DIR=$(dirname "$SCRIPT")
