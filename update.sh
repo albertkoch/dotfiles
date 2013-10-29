@@ -6,12 +6,12 @@ SCRIPT_DIR=`dirname "$SCRIPT"`
 cd "${SCRIPT_DIR}"
 
 symref="`git symbolic-ref HEAD`"
-current_branch="`expr ${symref} : 'refs/heads/\(.*\)'`"
+current_branch="${symref##*/}"
 current_rev="`git rev-list --max-count=1 ${current_branch}`"
 
 remote="`git config branch.${current_branch}.remote`"
 remote_ref="`git config branch.${current_branch}.merge`"
-remote_branch="`expr $remote_ref : 'refs/heads/\(.*\)'`"
+remote_branch="${remote_ref##*/}"
 tracking_branch="refs/remotes/${remote}/${remote_branch}"
 tracking_rev="`git rev-list --max-count=1 ${tracking_branch}`"
 
