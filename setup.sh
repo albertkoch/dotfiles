@@ -54,7 +54,7 @@ done
 
 bashrc="`relpath "${SCRIPT_DIR}/bashrc" "${PWD}"`"
 bashrc="source ${bashrc} ${bashrc}"
-if ! (grep "$bashrc" .bashrc 2>&1 >/dev/null); then
+if ! grep -q -F "$bashrc" .bashrc; then
     printf "Adding configuration to .bashrc...                             "
     printf "\n# Added by dotfiles setup script\n%s\n" "$bashrc" >> .bashrc
     echo "`colorize setaf 2`done`colorize sgr0`"
@@ -62,7 +62,7 @@ fi
 
 crontab="`crontab -l`"
 cronline="0 0 * * * (cd ${SCRIPT_DIR}; git fetch) 2>/dev/null >/dev/null"
-if ! (echo "${crontab}" | grep -F "${cronline}" 2>&1 >/dev/null); then
+if ! echo "${crontab}" | grep -q -F "${cronline}"; then
     printf "Adding configuration to crontab...                             "
     printf "%s\n# Added by dotfiles setup script\n%s\n\n" "${crontab}" "${cronline}" | crontab
     echo "`colorize setaf 2`done`colorize sgr0`"
