@@ -52,8 +52,8 @@ for file in ${FILES}; do
     fi
 done
 
-bashrc="`relpath "${SCRIPT_DIR}/bashrc" "${PWD}"`"
-bashrc="source ${bashrc} ${bashrc}"
+bashrc="\${HOME}/`relpath "${SCRIPT_DIR}/bashrc" "${PWD}"`"
+bashrc=". ${bashrc} ${bashrc}"
 if ! grep -q -F "$bashrc" .bashrc; then
     printf "Adding configuration to .bashrc...                             "
     printf "\n# Added by dotfiles setup script\n%s\n" "$bashrc" >> .bashrc
