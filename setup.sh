@@ -3,8 +3,8 @@
 SCRIPT=`readlink -f "$0"`
 SCRIPT_DIR=`dirname "$SCRIPT"`
 TPUT=`which tput`
-FILES="Xmodmap ratpoisonrc screenrc vim vimrc"
-EXECUTABLES="ratpoison screen wmname xset xsetroot xterm xtrlock"
+FILES="Xmodmap ratpoisonrc screenrc tmux.conf vim vimrc"
+EXECUTABLES="acpi ratpoison screen wmname xset xsetroot xterm xtrlock"
 
 if [ "${PWD}" != "${HOME}" ]; then
     echo "WARNING: This script is meant to be run from your home directory, but you have run it from ${PWD}." | fmt
