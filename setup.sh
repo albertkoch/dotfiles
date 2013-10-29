@@ -3,8 +3,8 @@
 SCRIPT=`readlink -f "$0"`
 SCRIPT_DIR=`dirname "$SCRIPT"`
 TPUT=`which tput`
-FILES="Xmodmap ratpoisonrc screenrc vim vimrc"
-EXECUTABLES="ratpoison screen wmname xset xsetroot xterm xtrlock"
+FILES="Xmodmap ratpoisonrc screenrc tmux.conf vim vimrc"
+EXECUTABLES="acpi ratpoison screen wmname xset xsetroot xterm xtrlock"
 
 if [ "${PWD}" != "${HOME}" ]; then
     echo "WARNING: This script is meant to be run from your home directory, but you have run it from ${PWD}." | fmt
@@ -52,19 +52,19 @@ for file in ${FILES}; do
     fi
 done
 
-bashrc="`relpath "${SCRIPT_DIR}/bashrc" "${PWD}"`"
-bashrc="source ${bashrc} ${bashrc}"
-if ! (grep "$bashrc" .bashrc 2>&1 >/dev/null); then
-    printf "Adding configuration to .bashrc...                             "
+bashrc="\${HOME}/`relpath "${SCRIPT_DIR}/bashrc" "${PWD}"`"
+bashrc=". ${bashrc} ${bashrc}"
+if ! grep -q -F "$bashrc" .bashrc; then
+    printf "%-63s" "Adding configuration to .bashrc..."
     printf "\n# Added by dotfiles setup script\n%s\n" "$bashrc" >> .bashrc
     echo "`colorize setaf 2`done`colorize sgr0`"
 fi
 
 crontab="`crontab -l`"
 cronline="0 0 * * * (cd ${SCRIPT_DIR}; git fetch) 2>/dev/null >/dev/null"
-if ! (echo "${crontab}" | grep -F "${cronline}" 2>&1 >/dev/null); then
-    printf "Adding configuration to crontab...                             "
-    printf "%s\n# Added by dotfiles setup script\n%s\n\n" "${crontab}" "${cronline}" | crontab
+if ! echo "${crontab}" | grep -q -F "${cronline}"; then
+    printf "%-63s" "Adding configuration to crontab..."
+    printf "%s\n# Added by dotfiles setup script\n%s\n" "${crontab}" "${cronline}" | crontab
     echo "`colorize setaf 2`done`colorize sgr0`"
 fi
 
