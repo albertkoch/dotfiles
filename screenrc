@@ -1,1 +1,4 @@
 hardstatus alwayslastline "%{= kr}%?%-Lw%?%{= rw}%n*%f %t%?(%u)%?%{= kr}%?%+Lw%?%{= kr} %=%H %l | %c %m/%d/%Y"
+shell -bash
+vbell_msg "Ding! -- Ding!"
+vbell on
