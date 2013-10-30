@@ -4,9 +4,13 @@ set -e
 sl_install()
 {
   target="${1}-${2}"
+  cd "$HOME"/tool/src
+  tfile="$target".tar.gz
+  if [ ! -r "$tfile" ]; then
+    wget "$3" -O "$target".tar.gz
+  fi
   cd "$HOME"/tool/build
-  wget "$3" -O "$target".tar.gz
-  tar -xf "$target".tar.gz
+  tar -xf "$HOME"/tool/src/"$tfile"
   cd "$target"
   if [ -e st.c ]; then
     patch -r - -p0 << EOT
@@ -35,7 +39,7 @@ if ! which stow > /dev/null; then
   exit 1
 fi
 
-mkdir -p tool/build tool/install
+mkdir -p tool/build tool/install tool/src
 sl_install wmname 0.1 http://dl.suckless.org/tools/wmname-0.1.tar.gz
 sl_install st 0.4.1 http://dl.suckless.org/st/st-0.4.1.tar.gz
 # vim:set sw=2:
