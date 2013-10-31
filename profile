@@ -18,9 +18,6 @@ done
 unset -f addPath
 PATH=${PATH#:}
 
-AMANPATH=tool/share
-export AMANPATH PATH
-
 if [ -f "$HOME"/.bashrc ]; then
   . "$HOME"/.bashrc
 fi
