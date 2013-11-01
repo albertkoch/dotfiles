@@ -22,4 +22,6 @@ bind v ratclick 2
 bind x exec exec xtrlock
 
 bind C-j nextscreen
-bind F20 ratclick 1
+definekey top F20 exec exec amixer -q sset Master unmute 5%-
+definekey top F21 exec exec amixer -q sset Master unmute 5%+
+definekey top F22 exec exec amixer -q sset Master toggle
