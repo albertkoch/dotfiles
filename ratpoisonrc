@@ -12,9 +12,12 @@ startup_message off
 warp on
 
 exec exec xterm -e bash -l -c "screen -xRR"
+banish
 
 escape C-o
 
+bind a exec exec ratdate
+bind b banishrel
 bind c exec exec xterm -e bash -l -c "screen -xRR"
 bind C exec exec xterm -e bash -l
 bind j nextscreen
