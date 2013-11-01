@@ -10,21 +10,17 @@ set bargravity c
 set bgcolor yellow
 startup_message off
 warp on
-
-exec exec xterm -e bash -l -c "screen -xRR"
 banish
 
 escape C-o
 
 bind a exec exec ratdate
 bind b banishrel
-bind c exec exec xterm -e bash -l -c "screen -xRR"
-bind C exec exec xterm -e bash -l
+bind c exec exec st
 bind j nextscreen
 bind v ratclick 2
 bind x exec exec xtrlock
 
-bind C-j nextscreen
 definekey top F20 exec exec amixer -q sset Master unmute 5%-
 definekey top F21 exec exec amixer -q sset Master unmute 5%+
 definekey top F22 exec exec amixer -q sset Master toggle
