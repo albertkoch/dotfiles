@@ -11,15 +11,15 @@ set bgcolor yellow
 startup_message off
 warp on
 
-exec exec xterm -e bash -l -c "screen -xRR"
+exec exec st -e screen -xRR
 banish
 
 escape C-o
 
 bind a exec exec ratdate
 bind b banishrel
-bind c exec exec xterm -e bash -l -c "screen -xRR"
-bind C exec exec xterm -e bash -l
+bind c exec exec st -e screen -xRR
+bind C exec exec st
 bind j nextscreen
 bind v ratclick 2
 bind x exec exec xtrlock
