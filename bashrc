@@ -24,6 +24,8 @@ if [ ! -z "$BASH" ]; then
     PS1="\[\e[0;32m\]\u@\h \[\e[1;34m\]\W {\!}$ \[\e[0m\]"
   fi
   shopt -s checkwinsize
+  complete -r
+  unset -f command_not_found_handle
 else
   if [ `id -u` -eq 0 ]; then
     PS1="${USER}@`hostname` \\# "
