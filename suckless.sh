@@ -10,7 +10,7 @@ sl_install()
     wget "$3" -O "$target".tar.gz
   fi
   cd "$HOME"/tool/build
-  tar -xf "$HOME"/tool/src/"$tfile"
+  gzip -dc "$HOME"/tool/src/"$tfile" | tar -tf -
   cd "$target"
   if [ -e st.c ]; then
     patch -r - -p0 << EOT
@@ -34,7 +34,7 @@ EOT
   stow "$target"
 }
 
-if ! which stow > /dev/null; then
+if ! which stow > /dev/null 2>&1; then
   printf "Unable to locate stow\n" 1>&2
   exit 1
 fi
