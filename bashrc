@@ -15,7 +15,6 @@ else
   EDITOR=vi
 fi
 PAGER=less
-LESSHISTFILE=-
 
 # Bash specific section
 if [ ! -z "$BASH" ]; then
@@ -33,16 +32,8 @@ else
   fi
 fi
 
-PS1_DOTFILES="\[\e[1;31m\]\$(${HOME}/.dotfiles/update.sh)\[\e[0m\]"
-PS1_CHROOT="${debian_chroot:+\[\e[1;31m\]($debian_chroot) \[\e[0m\]}"
-PS1_PROMPT="\[\e[0;32m\]\u@\h \[\e[1;34m\]\W $ \[\e[0m\]"
-PS1="${PS1_DOTFILES}${PS1_CHROOT}${PS1_PROMPT}"
-LEDGER_FILE=ledger.ldg
-
 export HISTCONTROL
 export PS1
 export LANG
 export EDITOR
 export PAGER
-export LESSHISTFILE
-export LEDGER_FILE

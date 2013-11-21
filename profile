@@ -7,7 +7,7 @@ addPath()
   fi
 }
 PATH=""
-for i in bin .software/bin .software/sbin; do
+for i in bin tool/bin tool/sbin; do
   addPath "$HOME"/"$i"
 done
 for base in /usr/local /usr/X11R6 /usr ""; do
@@ -18,7 +18,8 @@ done
 unset -f addPath
 PATH=${PATH#:}
 
-export PATH
+AMANPATH=tool/share
+export AMANPATH PATH
 
 if [ -f "$HOME"/.bashrc ]; then
   . "$HOME"/.bashrc
