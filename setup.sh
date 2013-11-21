@@ -4,7 +4,7 @@ set -e
 SCRIPT=`readlink -f "$0" 2> /dev/null || echo "${PWD}/$0"`
 SCRIPT_DIR=`dirname "$SCRIPT"`
 TPUT=`which tput`
-FILES="Xmodmap ratpoisonrc screenrc tmux.conf vim vimrc"
+FILES="Xmodmap bashrc profile ratpoisonrc screenrc tmux.conf vim vimrc"
 EXECUTABLES="acpi ratpoison screen vim wmname xset xsetroot xterm xtrlock"
 
 if [ "${PWD}" != "${HOME}" ]; then
@@ -52,14 +52,6 @@ for file in ${FILES}; do
         fi
     fi
 done
-
-bashrc="\${HOME}/`relpath "${SCRIPT_DIR}/bashrc" "${PWD}"`"
-bashrc=". ${bashrc} ${bashrc}"
-if ! grep -q -F "$bashrc" .bashrc; then
-    printf "%-63s" "Adding configuration to .bashrc..."
-    printf "\n# Added by dotfiles setup script\n%s\n" "$bashrc" >> .bashrc
-    echo "`colorize setaf 2`done`colorize sgr0`"
-fi
 
 crontab="`crontab -l`"
 cronline="0 0 * * * (cd ${SCRIPT_DIR}; git fetch) 2>/dev/null >/dev/null"
