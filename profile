@@ -7,7 +7,7 @@ addPath()
   fi
 }
 PATH=""
-for i in bin .software/bin .software/sbin; do
+for i in bin .software/bin .software/sbin .rvm/bin; do
   addPath "$HOME"/"$i"
 done
 for base in /usr/local /usr/X11R6 /usr ""; do
@@ -19,6 +19,10 @@ unset -f addPath
 PATH=${PATH#:}
 
 export PATH
+
+if [ ! -z "$BASH" ]; then
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+fi
 
 if [ -f "$HOME"/.bashrc ]; then
   . "$HOME"/.bashrc
