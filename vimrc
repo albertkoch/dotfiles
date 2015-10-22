@@ -8,3 +8,5 @@ Bundle 'snipMate'
 Bundle 'editorconfig/editorconfig-vim'
 
 filetype plugin indent on
+
+color desert
