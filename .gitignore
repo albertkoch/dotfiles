@@ -1,3 +1,4 @@
 *.swp
 /vim/bundle/snipMate
 /vim/bundle/editorconfig-vim
+/vim/.netrwhist
